@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\GroupFunctionModel whereDescription($value)
  * @method static \Illuminate\Database\Query\Builder|\App\GroupFunctionModel whereCreated($value)
  * @mixin \Eloquent
+ * @property integer $weight
+ * @method static \Illuminate\Database\Query\Builder|\App\GroupFunctionModel whereWeight($value)
  */
 class GroupFunctionModel extends Model
 {

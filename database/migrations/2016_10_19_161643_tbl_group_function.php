@@ -18,6 +18,7 @@ class TblGroupFunction extends Migration
         $table->integer('project_id');
         $table->string('name');
         $table->text('description');
+        $table->integer('weight')->default(0);
         $table->integer('created');
     });
     }

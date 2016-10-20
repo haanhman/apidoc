@@ -5,8 +5,15 @@
             <h1><?php echo $data['project']->name ?></h1>
 
             <p class="lead"><?php echo nl2br($data['project']->description) ?></p>
+            <ul>
+                @foreach($data['group_function'] as $group)
+                    <li><a href="#group-{{$group->id}}">{{$group->name}}</a></li>
+                @endforeach
+            </ul>
+
             @foreach($data['group_function'] as $group)
                 <h2>{{$group->name}}</h2>
+                <a name="group-{{$group->id}}"></a>
                 <p><?php echo nl2br($group->description) ?></p>
                 <hr/>
                 <?php
@@ -26,7 +33,7 @@
                                 <a role="button" data-toggle="collapse" data-parent="#accordion"
                                    href="#collapse_<?php echo $func['id'] ?>" aria-expanded="true"
                                    aria-controls="collapseOne">
-                                    <?php echo $func['end_point'] ?>
+                                    <?php echo $func['end_point'] . ' [' . $func['request_method'] . ']' ?>
                                 </a>
                             </h4>
                         </div>
@@ -121,8 +128,8 @@
         </div>
     </div>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('pre code').each(function(i, block) {
+        $(document).ready(function () {
+            $('pre code').each(function (i, block) {
                 hljs.highlightBlock(block);
             });
         });

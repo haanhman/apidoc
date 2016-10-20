@@ -11,11 +11,11 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        $limit = 2;
+        $limit = 1;
         for ($i = 0; $i < $limit; $i++) {
             $item = new \App\ProjectModel();
-            $item->name = $this->faker->name;
-            $item->description = $this->faker->sentence;
+            $item->name = 'Time maganement system';
+            $item->description = 'Time maganement system api server';
             $item->status = 1;
             $item->created = time();
             $item->save();

@@ -97,8 +97,8 @@ class FunctionController extends Controller
                     $arg = new ReturnValueModel();
                     $arg->function_id = $function->id;
                     $arg->name = $name;
-                    $arg->data_type = $argument['type'][$index];
-                    $arg->description = trim($argument['description'][$index]);
+                    $arg->data_type = $return_value['type'][$index];
+                    $arg->description = trim($return_value['description'][$index]);
                     $arg->weight = $index;
                     $arg->created = time();
                     $arg->save();
@@ -197,8 +197,8 @@ class FunctionController extends Controller
                     $arg = new ReturnValueModel();
                     $arg->function_id = $function->id;
                     $arg->name = $name;
-                    $arg->data_type = $argument['type'][$index];
-                    $arg->description = trim($argument['description'][$index]);
+                    $arg->data_type = $return_value['type'][$index];
+                    $arg->description = trim($return_value['description'][$index]);
                     $arg->weight = $index;
                     $arg->created = time();
                     $arg->save();
@@ -209,6 +209,13 @@ class FunctionController extends Controller
 
         \Session::flash('message', 'Edit function success');
         return \Redirect::route('function.index',['group_id' => $group_id, 'project_id' => $project_id]);
+        //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+        //.eyJpc3MiOiJodHRwOi8vZ3VuZHVtLmRldi91c2VyL3JlZ2lzdGVyIiwiaWF0IjoxNDc2Nzc2NzI4LCJleHAiOjE0NzY5OTI3MjgsIm5iZiI6MTQ3Njc3NjcyOCwianRpIjoiTlRjU3laWU9Cc0RNVjNjeiIsInN1YiI6Mn0
+        //.NFaqwKhLl6hp5PkM7Q4rTe-oW6c2I-zmKvMNnMzwqxw
+        /*
+         *
+         * aaa_1:sddsdgsgsdgsdgsdgsd
+         * */
 
     }
 }

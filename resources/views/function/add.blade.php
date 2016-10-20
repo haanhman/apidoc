@@ -41,7 +41,7 @@
             <div class="form-group">
                 {!! Form::label('status', 'Status: ', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-10">
-                    {!! Form::select('status',[0 => 'Draft', 1=>'Done'],null,['class' => 'form-control']) !!}
+                    {!! Form::select('status',[0 => 'Draft', 1=>'Done'],1,['class' => 'form-control']) !!}
                 </div>
             </div>
 

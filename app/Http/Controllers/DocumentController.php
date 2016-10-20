@@ -16,16 +16,16 @@ class DocumentController extends Controller
     public function index($project_id) {
         $data = array();
         $data['project'] = ProjectModel::findOrFail($project_id);
-        $data['group_function'] = GroupFunctionModel::where('project_id','=',$project_id)->orderBy('id', 'DESC')->get();
-        if(empty($data['group_function'])) {
+        $data['group_function'] = GroupFunctionModel::where('project_id','=',$project_id)->orderBy('weight', 'ASC')->get();
+        if(empty($data['group_function']->toArray())) {
            die('chua co group function');
-        }
+        } else
         $listGroupFunctionId = array();
         foreach($data['group_function'] as $item) {
             $listGroupFunctionId[] = $item->id;
         }
 
-        $function =  FunctionModel::whereIn('group_id', $listGroupFunctionId)->orderBy('id', 'DESC')->get();
+        $function =  FunctionModel::whereIn('group_id', $listGroupFunctionId)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
         if(!empty($function)) {
             $listFunctionId = array();
             foreach($function as $item) {
@@ -44,6 +44,6 @@ class DocumentController extends Controller
                 $data['return_value'][$item->function_id][] = $item->toArray();
             }
         }
-        return view('document.index', ['data' => $data]);
+        return view(isset($_GET['md']) ? 'document.md' : 'document.index', ['data' => $data]);
     }
 }
