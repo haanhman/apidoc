@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::resource('project', 'ProjectController', ['only' => ['index', 'create', 'store', 'edit', 'update']]);
 Route::resource('group', 'GroupFunctionController', ['only' => ['create', 'store', 'edit', 'update']]);
-Route::get('group/{project_id}', 'GroupFunctionController@index')->name('group.index');
-Route::get('function/{project_id}/{group_id}', 'FunctionController@index')->name('function.index');
+Route::get('group/project/{project_id}', 'GroupFunctionController@index')->name('group.index');
+Route::get('function/list/{project_id}/{group_id}', 'FunctionController@index')->name('function.index');
 Route::get('function/create/{project_id}/{group_id}', 'FunctionController@create')->name('function.create');
-Route::resource('function', 'FunctionController', ['only' => ['store']]);
+Route::resource('function', 'FunctionController', ['only' => ['store', 'edit', 'update']]);

@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property boolean $is_header
  * @method static \Illuminate\Database\Query\Builder|\App\ArgumentModel whereIsHeader($value)
+ * @property boolean $is_required
+ * @method static \Illuminate\Database\Query\Builder|\App\ArgumentModel whereIsRequired($value)
  */
 class ArgumentModel extends Model
 {

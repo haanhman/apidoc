@@ -17,7 +17,7 @@ class ArgumentSeeder extends Seeder
             $item->function_id = $this->faker->numberBetween(1,5);
             $item->name = $this->faker->word;
             $item->data_type = $this->faker->randomElement(['int', 'float', 'double', 'string', 'array']);
-            $item->is_requered = $this->faker->numberBetween(0,1);
+            $item->is_required = $this->faker->numberBetween(0,1);
             $item->description = $this->faker->sentence;
             $item->weight = $i+1;
             $item->created = time();

@@ -18,7 +18,7 @@ class TblArugument extends Migration
             $table->integer('function_id');
             $table->string('name');
             $table->enum('data_type', ['int', 'float', 'double', 'string', 'array']);
-            $table->boolean('is_requered')->default(1);
+            $table->boolean('is_required')->default(1);
             $table->boolean('is_header')->default(0);
             $table->text('description');
             $table->integer('weight');

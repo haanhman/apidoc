@@ -2,12 +2,13 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h2>create function group: <span style="color: green">{{$data['group']->name}}</span> of project <span
+            <h2>Edit function group: <span style="color: green">{{$data['group']->name}}</span> of project <span
                         style="color: blue">{{$data['project']->name}}</span></h2>
+
             <div style="margin: 10px 0px;">
                 {{link_to_route('function.index','Back', ['group_id'=>$data['group']->id,'project_id' => $data['project']->id], ['class' => 'btn btn-primary'])}}
             </div>
-            {!! Form::open(['url' => route('function.store'), 'class' => 'form-horizontal']) !!}
+            {{ Form::model($data['function'],['url' => route('function.update', ['id' => $data['function']->id]), 'class' => 'form-horizontal', 'method' => 'PATCH'])  }}
             {!! Form::hidden('group_id',$data['group']->id) !!}
             {!! Form::hidden('project_id',$data['project']->id) !!}
             <div class="form-group">
@@ -20,7 +21,9 @@
             <div class="form-group">
                 {!! Form::label('request_method', 'Request method: ', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-10">
-                    {!! Form::select('request_method',['GET' => 'GET', 'POST' => 'POST', 'PUT' => 'PUT', 'DELETE' => 'DELETE'],null,['class' => 'form-control']) !!}
+                    {!! Form::select('request_method',['GET' => 'GET', 'POST' => 'POST', 'PUT' => 'PUT', 'DELETE' =>
+                    'DELETE'],null,['class' => 'form-control'])
+                    !!}
                 </div>
             </div>
 
@@ -48,19 +51,52 @@
 
             <h3>Argument</h3>
             <a class="add-argument" style="cursor: pointer; color: blue;">Add argument</a>
+
             <div id="argument">
+
+
+                @foreach($data['listArgument'] as $item)
+                    <div id="argument_base" class="form-group form-inline">
+                        <input type="text" value="{{Html::entities($item->name)}}" class="form-control"
+                               name="argument[name][{{$loop->index}}]" placeholder="Name">
+                        <select class="form-control" name="argument[type][{{$loop->index}}]">
+                            <option <?php if ($item->data_type == 'int') echo 'selected'; ?> value="int">int</option>
+                            <option <?php if ($item->data_type == 'float') echo 'selected'; ?> value="float">float
+                            </option>
+                            <option <?php if ($item->data_type == 'double') echo 'selected'; ?> value="double">double
+                            </option>
+                            <option <?php if ($item->data_type == 'string') echo 'selected'; ?> value="string">string
+                            </option>
+                            <option <?php if ($item->data_type == 'array') echo 'selected'; ?> value="array">array
+                            </option>
+                        </select>
+                        <label>Required: <input type="checkbox" name="argument[is_required][{{$loop->index}}]"
+                                                value="1" <?php if ($item->is_required == 1) echo 'checked=""'; ?>></label>
+                        <label>Header: <input type="checkbox" name="argument[is_header][{{$loop->index}}]"
+                                              value="1" <?php if ($item->is_header == 1) echo 'checked=""'; ?>></label>
+                        <input value="{{Html::entities($item->description)}}" style="width: 40%" type="text"
+                               class="form-control" name="argument[description][{{$loop->index}}]"
+                               placeholder="Description">
+                        <a class="argument-rm">Delete</a>
+                    </div>
+                @endforeach
+                <?php
+                $arg_index = count($data['listArgument']);
+                ?>
                 <div id="argument_base" class="form-group form-inline">
-                    <input type="text" class="form-control" name="argument[name][0]" placeholder="Name">
-                    <select class="form-control" name="argument[type][0]">
+                    <input type="text" class="form-control" name="argument[name][{{$arg_index}}]" placeholder="Name">
+                    <select class="form-control" name="argument[type][{{$arg_index}}]">
                         <option value="int">int</option>
                         <option value="float">float</option>
                         <option value="double">double</option>
                         <option value="string">string</option>
                         <option value="array">array</option>
                     </select>
-                    <label>Required: <input type="checkbox" name="argument[is_required][0]" value="1" checked=""></label>
-                    <label>Header: <input type="checkbox" name="argument[is_header][0]" value="1"></label>
-                    <input style="width: 40%" type="text" class="form-control" name="argument[description][0]"
+                    <label>Required: <input type="checkbox" name="argument[is_required][{{$arg_index}}]" value="1"
+                                            checked=""></label>
+                    <label>Header: <input type="checkbox" name="argument[is_header][{{$arg_index}}]" value="1"></label>
+                    <input style="width: 40%" type="text" class="form-control"
+                           name="argument[description][{{$arg_index}}]"
                            placeholder="Description">
                     <a class="argument-rm">Delete</a>
                 </div>
@@ -68,17 +104,44 @@
 
             <h3>Return value</h3>
             <a class="add-return" style="cursor: pointer; color: blue;">Add return value</a>
+
             <div id="returnvalue">
+
+                @foreach($data['listReturnValue'] as $item)
+                    <div class="form-group form-inline">
+                        <input value="{{$item->name}}" type="text" class="form-control"
+                               name="returnvalue[name][{{$loop->index}}]" placeholder="Name">
+                        <select class="form-control" name="returnvalue[type][{{$loop->index}}]">
+                            <option <?php if ($item->data_type == 'int') echo 'selected'; ?> value="int">int</option>
+                            <option <?php if ($item->data_type == 'float') echo 'selected'; ?> value="float">float
+                            </option>
+                            <option <?php if ($item->data_type == 'double') echo 'selected'; ?> value="double">double
+                            </option>
+                            <option <?php if ($item->data_type == 'string') echo 'selected'; ?> value="string">string
+                            </option>
+                            <option <?php if ($item->data_type == 'array') echo 'selected'; ?> value="array">array
+                            </option>
+                        </select>
+                        <input value="{{$item->description}}" style="width: 40%" type="text" class="form-control"
+                               name="returnvalue[description][{{$loop->index}}]"
+                               placeholder="Description">
+                        <a class="argument-rm">Delete</a>
+                    </div>
+                @endforeach
+                <?php
+                $rt_index = count($data['listReturnValue']);
+                ?>
                 <div id="returnvalue_base" class="form-group form-inline">
-                    <input type="text" class="form-control" name="returnvalue[name][0]" placeholder="Name">
-                    <select class="form-control" name="returnvalue[type][0]">
+                    <input type="text" class="form-control" name="returnvalue[name][{{$rt_index}}]" placeholder="Name">
+                    <select class="form-control" name="returnvalue[type][{{$rt_index}}]">
                         <option value="int">int</option>
                         <option value="float">float</option>
                         <option value="double">double</option>
                         <option value="string">string</option>
                         <option value="array">array</option>
                     </select>
-                    <input style="width: 40%" type="text" class="form-control" name="returnvalue[description][0]"
+                    <input style="width: 40%" type="text" class="form-control"
+                           name="returnvalue[description][{{$rt_index}}]"
                            placeholder="Description">
                     <a class="argument-rm">Delete</a>
                 </div>
@@ -96,7 +159,7 @@
     </div>
     <script type="text/javascript">
         $(function () {
-            var arg_index = 1;
+            var arg_index = <?php echo $arg_index+1; ?>;
             $('.add-argument').click(function () {
                 var base_html = '<input type="text" class="form-control" name="argument[name][' + arg_index + ']" placeholder="Name">';
                 base_html += ' <select  class="form-control" name="argument[type][' + arg_index + ']">';
@@ -120,7 +183,7 @@
                 $(this).parent().remove();
             });
             //return value
-            var return_index = 1;
+            var return_index = <?php echo $rt_index+1; ?>;
             $('.add-return').click(function () {
                 var return_value_html = '<input type="text" class="form-control" name="returnvalue[name][' + return_index + ']" placeholder="Name">';
                 return_value_html += ' <select class="form-control" name="returnvalue[type][' + return_index + ']">';

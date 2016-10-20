@@ -19,7 +19,7 @@
                 @foreach($data['listItem'] as $item)
                     <tr>
                         <td>{{$loop->index+1}}</td>
-                        <td>{{$item->end_point}}</td>
+                        <td>{{link_to_route('function.edit',$item->end_point,['id' => $item->id])}}</td>
                         <td>{{$item->request_method}}</td>
                         <td><?php echo nl2br($item->description) ?></td>
                         <td><?php echo date('d/m/Y H:i', $item->created) ?></td>
