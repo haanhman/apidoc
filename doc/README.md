@@ -41,3 +41,4 @@ mannv_apidoc
 	[/entry [PUT]](#/entry [PUT])
 	[/entry [POST]](#/entry [POST])
 	[/entry/user [GET]](#/entry/user [GET])
+
