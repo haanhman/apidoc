@@ -14,6 +14,7 @@
                     <th>End point</th>
                     <th>Method</th>
                     <th>Description</th>
+                    <th>Status</th>
                     <th>Created</th>
                 </tr>
                 @foreach($data['listItem'] as $item)
@@ -22,6 +23,13 @@
                         <td>{{link_to_route('function.edit',$item->end_point,['id' => $item->id])}}</td>
                         <td>{{$item->request_method}}</td>
                         <td><?php echo nl2br($item->description) ?></td>
+                        <td>
+                            <?php
+                                if($item->status == 1) {
+                                    echo '<span style="color: green;" class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+                                }
+                            ?>
+                        </td>
                         <td><?php echo date('d/m/Y H:i', $item->created) ?></td>
                     </tr>
                 @endforeach

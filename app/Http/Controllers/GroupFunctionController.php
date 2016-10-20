@@ -32,9 +32,12 @@ class GroupFunctionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($project_id)
     {
-        //
+        $data = array();
+
+        $data['project'] = ProjectModel::findOrFail($project_id);
+        return view('group.add', ['data' => $data]);
     }
 
     /**
@@ -45,7 +48,19 @@ class GroupFunctionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = trim($request->get('name'));
+        $description = trim($request->get('description'));
+        $project_id = intval($request->get('project_id'));
+        if(!empty($name)) {
+            $gf = new GroupFunctionModel();
+            $gf->name = $name;
+            $gf->description = $description;
+            $gf->project_id = $project_id;
+            $gf->created = time();
+            $gf->save();
+            \Session::flash('message','create group success');
+            return \Redirect::route('group.index', ['project_id' => $project_id]);
+        }
     }
 
 
@@ -57,7 +72,11 @@ class GroupFunctionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = array();
+        $data['group_function'] = GroupFunctionModel::findOrFail($id);
+        $project_id = $data['group_function']->project_id;
+        $data['project'] = ProjectModel::findOrFail($project_id);
+        return view('group.edit', ['data' => $data]);
     }
 
     /**
@@ -69,6 +88,17 @@ class GroupFunctionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $name = trim($request->get('name'));
+        $description = trim($request->get('description'));
+        $project_id = intval($request->get('project_id'));
+        if(!empty($name)) {
+            $gf = GroupFunctionModel::findOrFail($id);
+            $gf->name = $name;
+            $gf->description = $description;
+            $gf->project_id = $project_id;
+            $gf->save();
+            \Session::flash('message','edit group success');
+            return \Redirect::route('group.index', ['project_id' => $project_id]);
+        }
     }
 }

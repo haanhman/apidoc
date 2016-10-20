@@ -78,7 +78,7 @@
                         <option value="string">string</option>
                         <option value="array">array</option>
                     </select>
-                    <input style="width: 40%" type="text" class="form-control" name="returnvalue[description][0]"
+                    <input style="width: 40%" type="text" class="form-control" name="returnvalue[description][]"
                            placeholder="Description">
                     <a class="argument-rm">Delete</a>
                 </div>

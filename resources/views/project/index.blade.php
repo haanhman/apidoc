@@ -12,6 +12,7 @@
                     <th>Project Name</th>
                     <th>Group function</th>
                     <th>Description</th>
+                    <th>Document</th>
                     <th>Created</th>
                 </tr>
                 @foreach($data['listProject'] as $item)
@@ -20,6 +21,7 @@
                         <td>{{$item->name}}</td>
                         <td>{{link_to_route('group.index','detail',['project_id' => $item->id])}}</td>
                         <td><?php echo nl2br($item->description) ?></td>
+                        <td>{{link_to_route('document.index','Detail',['project_id' => $item->id], ['target' => '_blank'])}}</td>
                         <td><?php echo date('d/m/Y H:i', $item->created) ?></td>
                     </tr>
                 @endforeach
