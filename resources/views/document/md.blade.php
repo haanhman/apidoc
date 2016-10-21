@@ -55,7 +55,7 @@ function change_url_seo($string, $file = false)
 <?php echo $data['project']->description ?><?php echo "\n"; ?>
 
 
-**Table of contents**<?php echo "\n" ?>
+**Table of contents**<?php echo "\n\n" ?>
 <?php
 $i = 1;
 foreach($data['group_function'] as $group) {
