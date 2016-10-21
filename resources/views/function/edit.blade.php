@@ -9,8 +9,13 @@
                 {{link_to_route('function.index','Back', ['group_id'=>$data['group']->id,'project_id' => $data['project']->id], ['class' => 'btn btn-primary'])}}
             </div>
             {{ Form::model($data['function'],['url' => route('function.update', ['id' => $data['function']->id]), 'class' => 'form-horizontal', 'method' => 'PATCH'])  }}
-            {!! Form::hidden('group_id',$data['group']->id) !!}
             {!! Form::hidden('project_id',$data['project']->id) !!}
+            <div class="form-group">
+                {{Form::label('group_id', 'Group: ', ['class' => 'col-sm-2 control-label'])}}
+                <div class="col-sm-10">
+                    {{Form::select('group_id',$data['list_group'],null,['class' => 'form-control'])}}
+                </div>
+            </div>
             <div class="form-group">
                 {!! Form::label('end_point', 'End point URL: ', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-10">

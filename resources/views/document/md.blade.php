@@ -1,27 +1,5 @@
 # <?php echo $data['project']->name ?><?php echo "\n"; ?>
 <?php echo $data['project']->description ?><?php echo "\n"; ?>
-
-
-**Table of contents**<?php echo "\n" ?>
-<?php
-foreach($data['group_function'] as $group) {
-?>
-[{{$group->name}}](#{{$group->name}})<?php echo "\n\n" ?>
-<?php
-$function = !empty($data['function'][$group->id]) ? $data['function'][$group->id] : array();
-if(!empty($function)) {
-foreach($function as $func) {
-$args = !empty($data['argument'][$func['id']]) ? $data['argument'][$func['id']] : array();
-$return_value = !empty($data['return_value'][$func['id']]) ? $data['return_value'][$func['id']] : array();
-?>
-<?php echo "\t"; ?>[<?php echo $func['end_point'] . ' [' . $func['request_method'] . ']' ?>](#<?php echo $func['end_point'] . ' [' . $func['request_method'] . ']' ?>)<?php echo "\n\n" ?>
-<?php
-}
-}
-}
-?>
-
-
 <?php
 foreach($data['group_function'] as $group) {
 ?>

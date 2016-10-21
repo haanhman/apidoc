@@ -27,3 +27,4 @@ Route::resource('function', 'FunctionController', ['only' => ['store', 'edit', '
 
 
 Route::get('document/{project_id}', 'DocumentController@index')->name('document.index');
+Route::get('function/{function_id}/delete', 'FunctionController@delete')->name('function.delete');

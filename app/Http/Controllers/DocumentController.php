@@ -25,7 +25,7 @@ class DocumentController extends Controller
             $listGroupFunctionId[] = $item->id;
         }
 
-        $function =  FunctionModel::whereIn('group_id', $listGroupFunctionId)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
+        $function =  FunctionModel::whereIn('group_id', $listGroupFunctionId)->where('status', '=', 1)->orderBy('request_method', 'ASC')->get();
         if(!empty($function)) {
             $listFunctionId = array();
             foreach($function as $item) {

@@ -28,7 +28,7 @@ class FunctionController extends Controller
         $data['group'] = GroupFunctionModel::findOrFail($group_id);
 
         $data['listItem'] = FunctionModel::where('group_id', '=' , $group_id)
-            ->orderBy('id', 'DESC')
+            ->orderBy('request_method', 'ASC')
             ->get();
         return view('function.index', ['data' => $data]);
     }
@@ -127,6 +127,14 @@ class FunctionController extends Controller
         //argument & return value
         $data['listArgument'] = ArgumentModel::where('function_id','=',$id)->get();
         $data['listReturnValue'] = ReturnValueModel::where('function_id','=',$id)->get();
+
+        //lay danh sach group
+        $listGroup = GroupFunctionModel::all();
+        $data['list_group'] = array();
+        foreach($listGroup as $item) {
+            $data['list_group'][$item->id] = $item->name;
+        }
+
         return view('function.edit', ['data' => $data]);
     }
 
@@ -139,7 +147,7 @@ class FunctionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $group_id = intval($request->get('group_id', 0));
+        $group_id = intval($request->get('group_id'));
         $project_id = intval($request->get('project_id', 0));
         $function = FunctionModel::findOrFail($id);
         $function->end_point = trim($request->get('end_point'));
@@ -147,6 +155,7 @@ class FunctionController extends Controller
         $function->description = trim($request->get('description'));
         $function->sample_data = trim($request->get('sample_data'));
         $function->status = intval($request->get('status'));
+        $function->group_id = $group_id;
         $function->save();
 
         //remove all data
@@ -217,5 +226,19 @@ class FunctionController extends Controller
          * aaa_1:sddsdgsgsdgsdgsdgsd
          * */
 
+    }
+
+    public function delete($id) {
+        FunctionModel::destroy($id);
+        $list = ArgumentModel::where('function_id', $id)->get();
+        foreach($list as $item) {
+            $item->delete();
+        }
+        $list = ReturnValueModel::where('function_id', $id)->get();
+        foreach($list as $item) {
+            $item->delete();
+        }
+        \Session::flash('message', 'Edit function success');
+        return \Redirect::back();
     }
 }

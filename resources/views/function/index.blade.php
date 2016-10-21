@@ -16,6 +16,7 @@
                     <th>Description</th>
                     <th>Status</th>
                     <th>Created</th>
+                    <th>Delete</th>
                 </tr>
                 @foreach($data['listItem'] as $item)
                     <tr>
@@ -31,6 +32,7 @@
                             ?>
                         </td>
                         <td><?php echo date('d/m/Y H:i', $item->created) ?></td>
+                        <td>{{link_to_route('function.delete', 'Delete', ['id' => $item->id], ['onclick' => 'return confirm(\'Are you sure?\')'])}}</td>
                     </tr>
                 @endforeach
             </table>

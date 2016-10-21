@@ -57,6 +57,7 @@ class GroupFunctionController extends Controller
             $gf->description = $description;
             $gf->project_id = $project_id;
             $gf->created = time();
+            $gf->weight = 0;
             $gf->save();
             \Session::flash('message','create group success');
             return \Redirect::route('group.index', ['project_id' => $project_id]);
