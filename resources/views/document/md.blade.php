@@ -60,7 +60,7 @@ function change_url_seo($string, $file = false)
 $i = 1;
 foreach($data['group_function'] as $group) {
 ?>
-<?php echo $i ?>. [{{$group->name}}](#{{$group->name}})<?php echo "\n\n" ?>
+<?php echo $i ?>. [{{$group->name}}](#{{change_url_seo($group->name)}})<?php echo "\n\n" ?>
 <?php
 $function = !empty($data['function'][$group->id]) ? $data['function'][$group->id] : array();
 if(!empty($function)) {
@@ -69,7 +69,7 @@ foreach($function as $func) {
 $args = !empty($data['argument'][$func['id']]) ? $data['argument'][$func['id']] : array();
 $return_value = !empty($data['return_value'][$func['id']]) ? $data['return_value'][$func['id']] : array();
 ?>
-<?php echo "\t" . $i . '.' . $j . '. [' . $func['end_point'] . '-' . $func['request_method'] ?>](#<?php echo change_url_seo($func['end_point'] . ' [' . $func['request_method'] .']') ?>)<?php echo "\n\n" ?>
+<?php echo "\t" . $i . '.' . $j . '. [/v1' . $func['end_point'] . '-' . $func['request_method'] ?>](#<?php echo change_url_seo('/v1'.$func['end_point'] . ' [' . $func['request_method'] .']') ?>)<?php echo "\n\n" ?>
 <?php
 }
 }
@@ -90,7 +90,7 @@ foreach($function as $func) {
 $args = !empty($data['argument'][$func['id']]) ? $data['argument'][$func['id']] : array();
 $return_value = !empty($data['return_value'][$func['id']]) ? $data['return_value'][$func['id']] : array();
 ?>
-### <?php echo $func['end_point'] . ' [' . $func['request_method'] . ']' ?><?php echo "\n"; ?>
+### <?php echo '/v1'.$func['end_point'] . ' [' . $func['request_method'] . ']' ?><?php echo "\n"; ?>
 *<?php echo $func['description'] ?>*<?php echo "\n\n"; ?>
 Request method: **<?php echo $func['request_method'] ?>**<?php echo "\n"; ?>
 
