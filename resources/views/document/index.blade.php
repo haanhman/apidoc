@@ -33,7 +33,7 @@
                                 <a role="button" data-toggle="collapse" data-parent="#accordion"
                                    href="#collapse_<?php echo $func['id'] ?>" aria-expanded="true"
                                    aria-controls="collapseOne">
-                                    <?php echo '/v1' . $func['end_point'] . ' [' . $func['request_method'] . ']' ?>
+                                    <?php echo $data['project']->prefix . $func['end_point'] . ' [' . $func['request_method'] . ']' ?>
                                 </a>
                             </h4>
                         </div>
@@ -42,7 +42,7 @@
                             <div class="panel-body">
                                 <p><em><?php echo nl2br($func['description']) ?></em></p>
 
-                                <p>End point: <strong><?php echo '/v1'.$func['end_point'] ?></strong></p>
+                                <p>End point: <strong><?php echo $data['project']->prefix.$func['end_point'] ?></strong></p>
 
                                 <p>Request method: <strong><?php echo $func['request_method'] ?></strong></p>
 

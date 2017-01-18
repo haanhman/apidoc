@@ -17,7 +17,7 @@ function vietdecode($value)
     $value = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $value);
     $value = preg_replace("/(Đ)/", 'D', $value);
     $trans = array(
-            ':' => '', '/' => '', '@' => '', '+' => '', '(' => '', ')' => '', '?' => '', '=' => '', '&' => '', '{' => '', '}' => ''
+        ':' => '', '/' => '', '@' => '', '+' => '', '(' => '', ')' => '', '?' => '', '=' => '', '&' => '', '{' => '', '}' => ''
     );
     $value = strtr($value, $trans);
 
@@ -69,7 +69,7 @@ foreach($function as $func) {
 $args = !empty($data['argument'][$func['id']]) ? $data['argument'][$func['id']] : array();
 $return_value = !empty($data['return_value'][$func['id']]) ? $data['return_value'][$func['id']] : array();
 ?>
-<?php echo "\t" . $i . '.' . $j . '. [/v1' . $func['end_point'] . '-' . $func['request_method'] ?>](#<?php echo change_url_seo('/v1'.$func['end_point'] . ' [' . $func['request_method'] .']') ?>)<?php echo "\n\n" ?>
+<?php echo "\t" . $i . '.' . $j . '. [' . $data['project']->prefix . $func['end_point'] . '-' . $func['request_method'] ?>](#<?php echo change_url_seo($data['project']->prefix . $func['end_point'] . ' [' . $func['request_method'] . ']') ?>)<?php echo "\n\n" ?>
 <?php
 }
 }
@@ -90,7 +90,7 @@ foreach($function as $func) {
 $args = !empty($data['argument'][$func['id']]) ? $data['argument'][$func['id']] : array();
 $return_value = !empty($data['return_value'][$func['id']]) ? $data['return_value'][$func['id']] : array();
 ?>
-### <?php echo '/v1'.$func['end_point'] . ' [' . $func['request_method'] . ']' ?><?php echo "\n"; ?>
+### <?php echo $data['project']->prefix . $func['end_point'] . ' [' . $func['request_method'] . ']' ?><?php echo "\n"; ?>
 *<?php echo $func['description'] ?>*<?php echo "\n\n"; ?>
 Request method: **<?php echo $func['request_method'] ?>**<?php echo "\n"; ?>
 
