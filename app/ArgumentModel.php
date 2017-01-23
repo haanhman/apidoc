@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\ArgumentModel whereIsHeader($value)
  * @property boolean $is_required
  * @method static \Illuminate\Database\Query\Builder|\App\ArgumentModel whereIsRequired($value)
+ * @property integer $project_id
+ * @method static \Illuminate\Database\Query\Builder|\App\ArgumentModel whereProjectId($value)
  */
 class ArgumentModel extends Model
 {

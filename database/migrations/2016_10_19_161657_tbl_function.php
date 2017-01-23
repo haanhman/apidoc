@@ -15,6 +15,7 @@ class TblFunction extends Migration
     {
         \Schema::create('function', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('project_id');
             $table->integer('group_id');
             $table->string('end_point');
             $table->enum('request_method',['GET','POST', 'PUT', 'DELETE']);

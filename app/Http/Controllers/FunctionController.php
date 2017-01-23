@@ -59,6 +59,7 @@ class FunctionController extends Controller
         $group_id = intval($request->get('group_id', 0));
         $project_id = intval($request->get('project_id', 0));
         $function = new FunctionModel();
+        $function->project_id = $project_id;
         $function->group_id = $group_id;
         $function->end_point = trim($request->get('end_point'));
         $function->request_method = trim($request->get('request_method'));
@@ -75,6 +76,7 @@ class FunctionController extends Controller
             if(!empty($argument['name'])) {
                 foreach($argument['name'] as $index => $name) {
                     $arg = new ArgumentModel();
+                    $arg->project_id = $project_id;
                     $arg->function_id = $function->id;
                     $arg->name = $name;
                     $arg->data_type = $argument['type'][$index];
@@ -95,6 +97,7 @@ class FunctionController extends Controller
             if(!empty($return_value['name'])) {
                 foreach($return_value['name'] as $index => $name) {
                     $arg = new ReturnValueModel();
+                    $arg->project_id = $project_id;
                     $arg->function_id = $function->id;
                     $arg->name = $name;
                     $arg->data_type = $return_value['type'][$index];

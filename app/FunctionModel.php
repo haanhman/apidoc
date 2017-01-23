@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\FunctionModel whereCreated($value)
  * @method static \Illuminate\Database\Query\Builder|\App\FunctionModel whereStatus($value)
  * @mixin \Eloquent
+ * @property integer $project_id
+ * @method static \Illuminate\Database\Query\Builder|\App\FunctionModel whereProjectId($value)
  */
 class FunctionModel extends Model
 {

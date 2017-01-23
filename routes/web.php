@@ -15,7 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('project', 'ProjectController', ['only' => ['index', 'create', 'store', 'edit', 'update']]);
+Route::resource('project', 'ProjectController', ['only' => ['index', 'store']]);
+Route::get('project/import', 'ProjectController@import')->name('project.import');
+
 Route::resource('group', 'GroupFunctionController', ['only' => ['store', 'edit', 'update']]);
 Route::get('group/create/{project_id}', 'GroupFunctionController@create')->name('group.create');
 

@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\ReturnValueModel whereWeight($value)
  * @method static \Illuminate\Database\Query\Builder|\App\ReturnValueModel whereCreated($value)
  * @mixin \Eloquent
+ * @property integer $project_id
+ * @method static \Illuminate\Database\Query\Builder|\App\ReturnValueModel whereProjectId($value)
  */
 class ReturnValueModel extends Model
 {

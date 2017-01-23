@@ -15,6 +15,7 @@ class TblArugument extends Migration
     {
         \Schema::create('argument', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('project_id');
             $table->integer('function_id');
             $table->string('name');
             $table->enum('data_type', ['int', 'float', 'double', 'string', 'array']);

@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\ProjectModel whereStatus($value)
  * @method static \Illuminate\Database\Query\Builder|\App\ProjectModel whereCreated($value)
  * @mixin \Eloquent
+ * @property string $prefix
+ * @method static \Illuminate\Database\Query\Builder|\App\ProjectModel wherePrefix($value)
  */
 class ProjectModel extends Model
 {

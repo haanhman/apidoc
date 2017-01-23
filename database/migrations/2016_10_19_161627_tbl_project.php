@@ -15,7 +15,8 @@ class TblProject extends Migration
     {
         \Schema::create('project', function(Blueprint $table){
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
+            $table->string('prefix', 50);
             $table->text('description');
             $table->boolean('status')->default(1);
             $table->integer('created');
